@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="assets/css/style.css">
+        <script src="assets/js/loading-bar.js"></script>
+    </head>
+    <body>
+        <button id="loadBtn">Load</button>
+        <button id="resetBtn">Reset</button>
+        <div class="container">
+            <div id="loadingBar" class="loading-bar"></div>
+        </div>
+
+        <script>
+            const loadingBar = new LoadingBar({
+                id: 'loadingBar',
+                color: [
+                    { max: 20, use: 'red' },
+                    { max: 40, use: 'orange' },
+                    { max: 60, use: 'yellow' },
+                    { max: 80, use: 'lightgreen' },
+                    { max: 100, use: 'green' }
+                ]
+            });
+
+            let timeout = null;
+            const addToLoadBar = () => {
+                if(loadingBar.getCurrent() >= 100) {
+                    timeout = null;
+                    return;
+                }
+                loadingBar.add(5);
+                timeout = setTimeout(addToLoadBar, 500);
+            }
+            const resetLoadBar = () => {
+                loadingBar.update(0);
+                clearTimeout(timeout);
+                timeout = null;
+            }
+            
+            document.getElementById('loadBtn').addEventListener('click', (e) => {
+                if(!timeout) addToLoadBar();
+            });
+            document.getElementById('resetBtn').addEventListener('click', resetLoadBar);
+        </script>
+    </body>
+</html>
