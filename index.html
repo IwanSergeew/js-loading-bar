@@ -37,7 +37,7 @@
                 timeout = setTimeout(addToLoadBar, 500);
             }
             const resetLoadBar = () => {
-                loadingBar.update(0);
+                loadingBar.set(0);
                 clearTimeout(timeout);
                 timeout = null;
             }

@@ -18,7 +18,7 @@ class LoadingBar {
         return this.#percent;
     }
 
-    update = (percent) => {
+    set = (percent) => {
         this.#percent = percent;
         this.inner.style = `background-color: ${this.getBarColor()}; --percent: ${percent};`;
     }
